@@ -1,0 +1,69 @@
+import java.util.Scanner;
+
+public class Abacus {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        
+        // Initialize the abacus with 10 beads in each row
+        int[][] abacus = new int[10][10];
+        
+        // Display the initial state of the abacus
+        System.out.println("Initial state:");
+        displayAbacus(abacus);
+        
+        // Loop to perform operations on the abacus
+        while (true) {
+            // Prompt the user for an operation
+            System.out.println("Enter an operation (+, -, x, /) or q to quit:");
+            String operation = input.next();
+            
+            // Check for the quit command
+            if (operation.equals("q")) {
+                System.out.println("Goodbye!");
+                break;
+            }
+            
+            // Prompt the user for a row and column
+            System.out.println("Enter a row and column (0-9):");
+            int row = input.nextInt();
+            int col = input.nextInt();
+            
+            // Perform the operation on the specified bead
+            switch (operation) {
+                case "+":
+                    abacus[row][col]++;
+                    break;
+                case "-":
+                    abacus[row][col]--;
+                    break;
+                case "x":
+                    abacus[row][col] *= 2;
+                    break;
+                case "/":
+                    abacus[row][col] /= 2;
+                    break;
+                default:
+                    System.out.println("Invalid operation!");
+                    continue;
+            }
+            
+            // Display the new state of the abacus
+            System.out.println("New state:");
+            displayAbacus(abacus);
+        }
+    }
+    
+    // Method to display the state of the abacus
+    public static void displayAbacus(int[][] abacus) {
+        for (int row = 0; row < abacus.length; row++) {
+            for (int col = 0; col < abacus[0].length; col++) {
+                if (abacus[row][col] == 0) {
+                    System.out.print("| ");
+                } else {
+                    System.out.print("* ");
+                }
+            }
+            System.out.println();
+        }
+    }
+}
